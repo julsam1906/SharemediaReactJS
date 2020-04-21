@@ -1,0 +1,23 @@
+.ant-upload-list-item-name {
+    display: inline-block;
+    width: 100%;
+    padding-left: 120px;
+    overflow: hidden;
+    line-height: 22px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+div.UploadImage {
+    margin-left: 50px;
+    width: auto;
+}
+
+button#boutonUpload.ant-btn {
+    width: auto;
+    
+}
+
+.ant-btn {
+    position: relative;
+}

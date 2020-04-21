@@ -1,0 +1,139 @@
+@import '~antd/dist/antd.css';
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+h1.ant-typography, .ant-typography h1  {
+  color: rgb(6, 11, 15);
+  margin-top: 30px;
+  font-style: italic;
+}
+
+.ant-btn-round.ant-btn-lg {
+  height: 40px;
+  padding: 6.4px 20px;
+  font-size: 16px;
+  border-radius: 40px;
+  margin-bottom: 10px;
+}
+
+.ant-carousel .slick-slide img {
+  margin-top: 0;
+  margin-bottom: 0,5em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  display: block;
+  text-align: center;
+}
+
+.ant-carousel {
+  margin-left: 10px;
+}
+
+.ant-card {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.ant-typography {
+  font-style: italic;
+  margin-left: 4px;
+}
+
+textarea.ant-input {
+  margin-bottom: 10px;
+  max-width: 30%;
+}
+
+.ant-input:placeholder-shown {
+  width: 200%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.ant-input {
+  max-width: 70%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+
+}
+
+.site-card-wrapper {
+  background: #ececec;
+  padding: 30px;
+}
+
+.ant-upload-list-item-name {
+  display: inline-block;
+  width: 100%;
+  padding-left: 120px;
+  overflow: hidden;
+  line-height: 22px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+div.UploadImage {
+  margin-left: 50px;
+  width: auto;
+}
+
+button#boutonUpload.ant-btn {
+  max-width: 100%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  
+}
+
+.ant-card-cover img {
+  border-radius: 2px 2px 0 0;
+}
+
+article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
+  display: block;
+  background-color: white;
+}
+
+textarea.ant-input {
+  margin-bottom: 10px;
+  max-width: 70%;
+}
+
