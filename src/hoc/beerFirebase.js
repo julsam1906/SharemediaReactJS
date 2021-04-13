@@ -3,18 +3,17 @@ import React, { Component } from 'react'
 // Firebase
 import base from '../base'
 
-const beerFirebase = WrappedComponent => (
+const beerApi = WrappedComponent => (
   class HOC extends Component {
     state = {
       beers: {},
       current: '',
-      urlApi: 'http://apisharemedia-env.eba-ikiwv3pt.ca-central-1.elasticbeanstalk.com/'
+      urlApi: 'http://localhost:8080/sharemedia'
     }
 
     getAll() {
-      const urlBiere = 'http://apisharemedia-env.eba-ikiwv3pt.ca-central-1.elasticbeanstalk.com/sharemedia/allBieres'
+      const urlBiere = this.state.urlApi+'/biere/all'
       this.ref = fetch(urlBiere, {
-        //mode: 'no-cors',
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -46,7 +45,10 @@ const beerFirebase = WrappedComponent => (
       const current = vars[5]
       this.setState({ current })
       this.getAll()
+    }
 
+    componentDidUpdate(){
+      this.getAll()
     }
 
     componentWillUnmount() {
@@ -54,14 +56,13 @@ const beerFirebase = WrappedComponent => (
     }
 
     addBeer = beer => {
-      const urlPost = this.state.urlApi + 'sharemedia/saveBiere'
+      const urlPost = this.state.urlApi + '/biere/save'
       const beers = { ...this.state.beers }
       console.log(JSON.stringify(beer))
       fetch(urlPost, {
-        mode: 'no-cors',
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json;charset=utf8',
+          'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
         body: JSON.stringify(beer)
@@ -81,11 +82,10 @@ const beerFirebase = WrappedComponent => (
     }
 
     updateBiere = beer => {
-      const urlPost = this.state.urlApi + 'sharemedia/updateBiere'
+      const urlPost = this.state.urlApi + '/biere/update'
       const beers = { ...this.state.beers }
       console.log(JSON.stringify(beer))
       fetch(urlPost, {
-        mode: 'no-cors',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf8',
@@ -108,7 +108,7 @@ const beerFirebase = WrappedComponent => (
     }
 
     deleteBiere = titre => {
-      fetch(this.state.urlApi + 'sharemedia/deleteBiere?titre=' + titre, {
+      fetch(this.state.urlApi + '/biere/delete?key=' + titre, {
         method: 'DELETE',
       })
         .then(res => res.text()) // or res.json()
@@ -122,6 +122,7 @@ const beerFirebase = WrappedComponent => (
           addBeer={this.addBeer}
           updateBiere={this.updateBiere}
           deleteBiere={this.deleteBiere}
+          getAll={this.getAll}
           beers={this.state.beers}
           {...this.props}
         />
@@ -129,4 +130,4 @@ const beerFirebase = WrappedComponent => (
     }
   }
 )
-export default beerFirebase
+export default beerApi

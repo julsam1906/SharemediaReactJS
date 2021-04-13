@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-const AccueilFirebase = WrappedComponent => (
+const AccueilApi = WrappedComponent => (
   class HOC extends Component {
     state = {
       pseudo: this.props.match.params.pseudo,
@@ -13,12 +13,11 @@ const AccueilFirebase = WrappedComponent => (
     }
 
     getAll() {
-      const urlFilm = 'http://apisharemedia-env.eba-ikiwv3pt.ca-central-1.elasticbeanstalk.com/sharemedia/allFilms'
-      const urlSerie = 'http://apisharemedia-env.eba-ikiwv3pt.ca-central-1.elasticbeanstalk.com/sharemedia/allSeries'
+      const urlFilm = 'http://localhost:8080/sharemedia/film/all'
+      const urlSerie = 'http://localhost:8080/sharemedia/serie/all'
       const urlZero = 'http://apisharemedia-env.eba-ikiwv3pt.ca-central-1.elasticbeanstalk.com/sharemedia/allZeros'
-      const urlBiere= 'http://apisharemedia-env.eba-ikiwv3pt.ca-central-1.elasticbeanstalk.com/sharemedia/allBieres'
+      const urlBiere= 'http://localhost:8080/sharemedia/biere/all'
       this.ref = fetch(urlBiere, {
-        //mode: 'no-cors',
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -129,7 +128,6 @@ const AccueilFirebase = WrappedComponent => (
       const current = vars[5]
       this.setState({ current })
       this.getAll()
-
     }
 
 
@@ -147,4 +145,4 @@ const AccueilFirebase = WrappedComponent => (
     }
   }
 )
-export default AccueilFirebase
+export default AccueilApi

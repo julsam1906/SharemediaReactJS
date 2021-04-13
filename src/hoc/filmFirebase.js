@@ -3,17 +3,17 @@ import React, { Component } from 'react'
 // Firebase
 import base from '../base'
 
-const filmFirebase = WrappedComponent => (
+const filmApi = WrappedComponent => (
   class HOC extends Component {
     state = {
       films: {},
       current: '',
       MAJ: false,
-      urlApi: 'http://apisharemedia-env.eba-ikiwv3pt.ca-central-1.elasticbeanstalk.com/'
+      urlApi: 'http://localhost:8080/sharemedia'
     }
 
     getAll() {
-      const urlFilm = this.state.urlApi+'sharemedia/allFilms'
+      const urlFilm = this.state.urlApi+'/film/all'
       this.ref = fetch(urlFilm, {
         //mode: 'no-cors',
         method: 'GET',
@@ -54,7 +54,7 @@ const filmFirebase = WrappedComponent => (
     }
 
     addFilms = film => {
-      const urlPost = this.state.urlApi+'sharemedia/saveFilm'
+      const urlPost = this.state.urlApi+'/film/save'
       const films = { ...this.state.films }
       console.log(JSON.stringify(film))
       fetch(urlPost, {
@@ -81,7 +81,7 @@ const filmFirebase = WrappedComponent => (
     }
 
     updateFilm = film => {
-      const urlPost = this.state.urlApi+'sharemedia/updateFilm'
+      const urlPost = this.state.urlApi+'/film/update'
       const films = { ...this.state.films }
       console.log(JSON.stringify(film))
       fetch(urlPost, {
@@ -108,7 +108,7 @@ const filmFirebase = WrappedComponent => (
     }
 
     deleteFilm = title => {
-      fetch(this.state.urlApi+'sharemedia/deleteFilm?title=' + title, {
+      fetch(this.state.urlApi+'/film/delete?key=' + title, {
         method: 'DELETE',
       })
         .then(res => res.text()) // or res.json()
@@ -130,4 +130,4 @@ const filmFirebase = WrappedComponent => (
     }
   }
 )
-export default filmFirebase
+export default filmApi

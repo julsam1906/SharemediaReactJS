@@ -3,18 +3,17 @@ import React, { Component } from 'react'
 // Firebase
 import base from '../base'
 
-const serieFirebase = WrappedComponent => (
+const serieApi = WrappedComponent => (
   class HOC extends Component {
     state = {
       series: {},
       current: '',
-      urlApi: 'http://apisharemedia-env.eba-ikiwv3pt.ca-central-1.elasticbeanstalk.com/'
+      urlApi: 'http://localhost:8080/sharemedia'
     }
 
     getAll() {
-      const urlSerie = 'http://apisharemedia-env.eba-ikiwv3pt.ca-central-1.elasticbeanstalk.com/sharemedia/allSeries'
+      const urlSerie = this.state.urlApi+'/serie/all'
       this.ref = fetch(urlSerie, {
-        //mode: 'no-cors',
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -46,7 +45,10 @@ const serieFirebase = WrappedComponent => (
       const current = vars[5]
       this.setState({ current })
       this.getAll()
+    }
 
+    componentDidUpdate(){
+      this.getAll()
     }
 
     componentWillUnmount() {
@@ -54,14 +56,13 @@ const serieFirebase = WrappedComponent => (
     }
 
     addSerie = serie => {
-      const urlPost = this.state.urlApi + 'sharemedia/saveSerie'
+      const urlPost = this.state.urlApi + '/serie/save'
       const series = { ...this.state.series }
       console.log(JSON.stringify(serie))
       fetch(urlPost, {
-        mode: 'no-cors',
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json;charset=utf8',
+          'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
         body: JSON.stringify(serie)
@@ -81,11 +82,10 @@ const serieFirebase = WrappedComponent => (
     }
 
     updateSerie = serie => {
-      const urlPost = this.state.urlApi + 'sharemedia/updateSerie'
+      const urlPost = this.state.urlApi + '/serie/update'
       const series = { ...this.state.series }
       console.log(JSON.stringify(serie))
       fetch(urlPost, {
-        mode: 'no-cors',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf8',
@@ -108,7 +108,7 @@ const serieFirebase = WrappedComponent => (
     }
 
     deleteSerie = titre => {
-      fetch(this.state.urlApi + 'sharemedia/deleteSerie?titre=' + titre, {
+      fetch(this.state.urlApi + '/serie/delete?key=' + titre, {
         method: 'DELETE',
       })
         .then(res => res.text()) // or res.json()
@@ -123,10 +123,11 @@ const serieFirebase = WrappedComponent => (
           updateSerie={this.updateSerie}
           deleteSerie={this.deleteSerie}
           series={this.state.series}
+          getAll={this.getAll}
           {...this.props}
         />
       )
     }
   }
 )
-export default serieFirebase
+export default serieApi

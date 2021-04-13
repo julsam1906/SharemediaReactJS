@@ -12,7 +12,6 @@ class AjouterSeries extends Component {
     state = {
         titre: '',
         plateforme: '',
-        realisateur: '',
         lien: '',
         descriptif:''
     }
